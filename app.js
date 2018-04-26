@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 //weight input route
 app.get('/', (req, res) =>{
-	res.render('Index', {message:'hello World'});
+	res.render('index', {message:'hello World'});
 });
 
 const port = 5000;
