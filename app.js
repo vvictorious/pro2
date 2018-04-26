@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path')
 const mongoose = require('mongoose');
-const user = ('./models/user')
+const User = ('./models/user')
 
 const app = express();
 
