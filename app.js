@@ -19,9 +19,15 @@ app.get('/', (req, res) =>{
 	res.render('index', {message:'hello World'});
 });
 
-const port = 5000;
+// const port = 5000;
 
-app.listen(port, () =>{
-	console.log('Server started on port ' + port);
-});
+// app.listen(port, () =>{
+// 	console.log('Server started on port ' + port);
+// });
+
+  app.set('port', process.env.PORT || 3001)
+
+  app.listen(app.get('port'), () => {
+    console.log(`✅ PORT: ${app.get('port')} 🌟`)
+  })
 
