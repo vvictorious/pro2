@@ -9,13 +9,13 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// index route
-app.get('/', (req, res) =>{
-	res.send('INDEX');
-});
+// // index route
+// app.get('/', (req, res) =>{
+// 	res.send('INDEX');
+// });
 
 //weight input route
-app.get('/user', (req, res) =>{
+app.get('/', (req, res) =>{
 	res.render('Index', {message:'hello World'});
 });
 
