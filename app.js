@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path')
+const mongoose = require('mongoose');
+const user = ('./models/user')
 
 const app = express();
 
@@ -22,3 +24,4 @@ const port = 5000;
 app.listen(port, () =>{
 	console.log('Server started on port ' + port);
 });
+
