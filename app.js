@@ -31,6 +31,10 @@ app.set('view engine', 'ejs');
 //   res.send('signup coming soon');
 // });
 
+
+app.get('/', function (req, res) {
+  res.send('Home coming soon');
+});
 // login route with placeholder response
 app.get('/login', function (req, res) {
   res.send('login coming soon');
