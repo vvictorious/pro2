@@ -8,6 +8,8 @@ if (process.env.NODE_ENV == 'production') {
     mongoose.connect('mongodb://localhost/body-journal');
 }
 
+ 
+
 let UserSchema = new Schema({
 	email: String,
 	passwordDigest: String
@@ -32,6 +34,32 @@ UserSchema.statics.createSecure = function (email, password, callback) {
         passwordDigest: hash
       }, callback);
     });
+  });
+};
+
+// compare password user enters with hashed password (`passwordDigest`)
+UserSchema.methods.checkPassword = function (password) {
+  // run hashing algorithm (with salt) on password user enters in order to compare with `passwordDigest`
+  return bcrypt.compareSync(password, this.passwordDigest);
+};
+
+// authenticate user (when user logs in)
+UserSchema.statics.authenticate = function (email, password, callback) {
+  // find user by email entered at log in
+  // remember `this` refers to the User for methods defined on UserSchema.statics
+  this.findOne({email: email}, function (err, foundUser) {
+    console.log(foundUser);
+
+    // throw error if can't find user
+    if (!foundUser) {
+      console.log('No user with email ' + email);
+      callback("Error: no user found", null);  // better error structures are available, but a string is good enough for now
+    // if we found a user, check if password is correct
+    } else if (foundUser.checkPassword(password)) {
+      callback(null, foundUser);
+    } else {
+      callback("Error: incorrect password", null);
+    }
   });
 };
 
