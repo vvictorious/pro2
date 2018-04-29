@@ -26,6 +26,9 @@ app.set('view engine', 'ejs');
 //maybe, I should put the mongoose.connect right here
 
 
+app.get('/', function(req, res){
+  res.render('index');
+})
 
 // signup route with placeholder response
 app.get('/signup', function (req, res) {
