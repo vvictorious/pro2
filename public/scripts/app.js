@@ -1,9 +1,6 @@
-console.log('it is working');
-
 $(document).ready(function(){
 
-
-		$("#signup-form").on("submit", function(event){
+	$("#signup-form").on("submit", function(event){
 
 		event.preventDefault();
 
@@ -18,7 +15,7 @@ $(document).ready(function(){
 		console.log(formData)
 
 		$.ajax({
-			url  : "/users",
+			url  : "/signup",
 			method : "POST",
 			data : formData,
 			success : function(response){
@@ -26,17 +23,7 @@ $(document).ready(function(){
 			}
 		})
 
-		var signupData = $("#signup-form").serialize();
-		console.log(signupData);
-		//   // send POST request to /users with the form data
-		$.post('/users', signupData, function(response){
-		    console.log(response);
-		})
-
-
 	})
-
-});
 
 	$("#login-form").on("submit", function(event){
 		event.preventDefault();
@@ -58,6 +45,4 @@ $(document).ready(function(){
 		})
 
 	})
-
-
-
+})
