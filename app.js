@@ -25,17 +25,17 @@ app.set('view engine', 'ejs');
 
 //list stuff is going to go inbetween the equal lines
 //==================================================================================
-let todoList = [
-  "wash the car and change oil",
-  "Buy groceries and make dinner"
-]
+// let todoList = [
+//   "wash the car and change oil",
+//   "Buy groceries and make dinner"
+// ]
 
 
-// let todoSchema = new mongoose.Schema({
-//   name: String
-// });
+let todoSchema = new mongoose.Schema({
+  name: String
+});
 
-// let Todo = mongoose.model("Todo", todoSchema);
+let Todo = mongoose.model("Todo", todoSchema);
 
 
 
@@ -66,23 +66,31 @@ app.get("/profile", function(req, res){
 
 //todo route
 app.get('/journal', function(req, res){
-  res.render('journal', { todoList: todoList })
-})
+  Todo.find({}, function(err, todoList){
+    if(err) console.log(err);
+    else{
+       res.render('journal', { todoList: todoList })
+    }
+  })
+ 
+});
+
 //submit button route for journal
 app.post('/newtodo', function(req, res){
   console.log('item submitted');
-  let item = req.body.item;
-  todoList.push(item);
+  let newItem = new Todo({
+    name: req.body.item
+  }) 
+  Todo.create(newItem, function(err, Todo){
+    if(err)console.log(err);
+    else {
+      console.log("Inserted item: " + newItem);
+    }
+  })
   res.redirect('/journal');
 })
 
-//submit button route
-app.post("/newtodo", function(req, res){
-  console.log("item submitted!")
-  let item = req.body.item;
-  todoList.push(item);
-  res.redirect("/profile");
-})
+
 
 app.post("/sessions", function(req, res){
   User.authenticate(req.body.email, req.body.password, function(err, existingUserDocument){
@@ -103,6 +111,11 @@ app.get('/logout', function (req, res) {
   // redirect to login (for now)
   res.redirect('/login');
 });
+
+//catch all other routes
+app.get("*", function(req, res){
+  res.send("<h1>Invalid Page</h1>");
+})
 
 
   app.set('port', process.env.PORT || 3001)
