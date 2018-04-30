@@ -23,9 +23,17 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//maybe, I should put the mongoose.connect right here
+//list stuff is going to go inbetween the equal lines
+//==================================================================================
+let todoList = [
+  "wash the car and change oil",
+  "Buy groceries and make dinner"
+]
 
 
+
+
+//==================================================================================
 app.get('/', function(req, res){
   res.render('index');
 })
@@ -46,8 +54,16 @@ app.post("/signup", function(req, res){
 
 app.get("/profile", function(req, res){
   User.findOne({_id : req.session.userId}, function(err, userDocument){
-    res.render('profile', {user : userDocument})
+    res.render('profile', {todoList : todoList})
   })
+})
+
+//submit button route
+app.post("/newtodo", function(req, res){
+  console.log("item submitted!")
+  let item = req.body.item;
+  todoList.push(item);
+  res.redirect("/profile");
 })
 
 app.post("/sessions", function(req, res){
