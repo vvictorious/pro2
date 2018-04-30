@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./public/CSS/main">
 
   <!-- bootstrap css -->
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -12,29 +11,31 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="scripts.js"></script>
 
-  <title>Profile page</title>
+  <title>Simple Login</title>
 </head>
 <body>
-  <a id="logout" href="/logout" class="btn btn-default">Log Out</a>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h1>Profile</h1>
+        <hr>
+        <h2>Welcome! You're logged in as <%= user.email %>.</h2>
 
-  <div class="container">
-    <row>
-      <h1 class="text-center"> Enter Todo Item</h1>
-      <form class="col-6 mx-auto" action="/newtodo" method="POST">
-        <div class="input-group">
-          <input type="text" class="form-control" name="item" placeholder="Enter todo Item" value="How much do you weigh today?"><span> <button type="submit" class="btn btn-primary"> Submit </button> </span>
-        </div>
+        <form>
+          Daily Fitness Habits<br>
+          <input type="text" name="firstname"><br>
+          Weight:<br>
+          <input type="text" name="lastname"><br>
+          A dirty little secret:<br>
+          <input type="text" name="lastname">
+        </form>
         
-      </form>
-    
-  </div>
+        <br>
+        <br>
+        <a id="logout" href="/logout" class="btn btn-default">Log Out</a>
 
-  <div class="row">
-    <ul>
-      <%for(var i = 0; i < todoList.length; i++){ %>
-        <li> <%= todoList[i] %></li>
-    <% } %>
-    </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>

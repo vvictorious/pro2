@@ -31,6 +31,12 @@ let todoList = [
 ]
 
 
+// let todoSchema = new mongoose.Schema({
+//   name: String
+// });
+
+// let Todo = mongoose.model("Todo", todoSchema);
+
 
 
 //==================================================================================
@@ -54,8 +60,20 @@ app.post("/signup", function(req, res){
 
 app.get("/profile", function(req, res){
   User.findOne({_id : req.session.userId}, function(err, userDocument){
-    res.render('profile', {todoList : todoList})
+    res.render('profile', {user : userDocument})
   })
+})
+
+//todo route
+app.get('/journal', function(req, res){
+  res.render('journal', { todoList: todoList })
+})
+//submit button route for journal
+app.post('/newtodo', function(req, res){
+  console.log('item submitted');
+  let item = req.body.item;
+  todoList.push(item);
+  res.redirect('/journal');
 })
 
 //submit button route

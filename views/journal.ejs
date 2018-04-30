@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/CSS/main">
+
+  <!-- bootstrap css -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="scripts.js"></script>
+
+  <title>Journal</title>
+</head>
+<body>
+  <a id="logout" href="/logout" class="btn btn-default">Log Out</a>
+
+  <div class="container">
+    <row>
+      <h1 class="text-center"> Fitness Progress</h1>
+      <form class="col-6 mx-auto" action="/newtodo" method="POST">
+        <div class="input-group">
+          <input type="text" class="form-control" name="item" placeholder="Enter todo Item" value="How much do you weigh today?"><span> <button type="submit" class="btn btn-primary"> Submit </button> </span>
+        </div>
+        
+      </form>
+    
+  </div>
+
+  <div class="row">
+    <ul>
+      <%for(var i = 0; i < todoList.length; i++){ %>
+        <li> <%= todoList[i] %></li>
+    <% } %>
+    </ul>
+  </div>
+</body>
+</html>
