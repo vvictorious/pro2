@@ -10,8 +10,9 @@ let UserSchema = new Schema({
 }); 
 
 
-
+console.log('here is what the' + process.env.NODE_ENV + 'is')
 if (process.env.NODE_ENV == 'production') {
+  console.log(process.env.MLAB_URL + 'made it to this point')
     mongoose.connect(process.env.MLAB_URL);
 } else {
     mongoose.connect('mongodb://localhost/body-journal');
@@ -26,6 +27,9 @@ UserSchema.statics.createSecure = function (email, password, callback) {
   bcrypt.genSalt(function (err, salt) {
   console.log('salt: ', salt);  // changes every time
     bcrypt.hash(password, salt, function (err, hash) {
+      console.log('made it to line 29 after salt')
+      console.log(email)
+      console.log(hash)
 
       UserModel.create({
         email: email,
