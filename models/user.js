@@ -13,7 +13,12 @@ let UserSchema = new Schema({
 console.log('here is what the' + process.env.NODE_ENV + 'is')
 if (process.env.NODE_ENV == 'production') {
   console.log(process.env.MLAB_URL + 'made it to this point')
-    mongoose.connect(process.env.MLAB_URL);
+    mongoose.connect(process.env.MLAB_URL).then(() => {
+      console.log('hello') 
+    })
+    .catch(err => {
+      console.log('logged the error' + err)
+    })
 } else {
     mongoose.connect('mongodb://localhost/body-journal');
 }
@@ -62,3 +67,9 @@ UserSchema.statics.authenticate = function (email, password, callback) {
 
 let User = mongoose.model('User', UserSchema);
 module.exports = User;
+
+mongodb://victorMejia:Pacman90@ds259089.mlab.com:59089/body-journal
+
+
+
+
