@@ -18,6 +18,7 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 UserSchema.statics.createSecure = function (email, password, callback) {
+  console.log('create secure function')
 
 
   var UserModel = this;

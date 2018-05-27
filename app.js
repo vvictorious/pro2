@@ -51,9 +51,13 @@ app.get('/signup', function (req, res) {
 });
 
 
+
 //going to get the data from the signup form, hash it, and store in the database
 app.post("/signup", function(req, res){
+  console.log('got to the /signup route')
   User.createSecure(req.body.email, req.body.password, function(err, newUserDocument){
+    console.log('the user document just got created')
+    if(err) console.log(err)
     res.json(newUserDocument)
   })
 });
