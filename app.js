@@ -118,8 +118,16 @@ app.get("*", function(req, res){
 })
 
 
-  app.set('port', process.env.PORT || 3001)
+  // app.set('port', process.env.PORT || 3001)
 
-  app.listen(app.get('port'), () => {
-    console.log(`✅ PORT: ${app.get('port')} 🌟`)
-  })
+  // app.listen(app.get('port'), () => {
+  //   console.log(`✅ PORT: ${app.get('port')} 🌟`)
+  // })
+
+  app.set( 'port', ( process.env.PORT || 3001 ));
+
+// Start node server
+app.listen( app.get( 'port' ), function() {
+  console.log( 'Node server is running on port ' + app.get( 'port' ));
+  });
+
